@@ -3,7 +3,7 @@ from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 
 
-def create_video_with_text(text, duration, width, height):
+def create_video_with_text(text, duration, width, height, size_text):
     # Задаем параметры видео
     width, height = int(width), int(height)
     fps = 30
@@ -16,7 +16,7 @@ def create_video_with_text(text, duration, width, height):
     draw = ImageDraw.Draw(image)
 
     # Задаем шрифт и размер текста
-    font = ImageFont.truetype('arial.ttf', 40)
+    font = ImageFont.truetype('arial.ttf', size_text)
 
     # Вычисляем скорость движения бегущей строки
     text_width, text_height = draw.textsize(text, font=font)
