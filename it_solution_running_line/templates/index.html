@@ -2,13 +2,70 @@
 <html>
 <head>
     <title>Главная страница</title>
+    <style>
+        body {
+            background-color: rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        form input[type="text"],
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <h1>Главная страница</h1>
-    <form method="POST" action="">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Сформировать видео и скачать его</button>
-    </form>
+    <header>
+        <h1>Бегущая строка</h1>
+    </header>
+
+    <div class="content">
+        <h2>Данный сайт позволяет выбрать параметры видео, которое впоследствии будет скачано</h2>
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Сформировать видео и скачать его</button>
+        </form>
+
+        <p>
+            <a href="{% url 'running_line:stats_page' %}">Последние запросы пользователей</a>
+        </p>
+    </div>
+
+    <footer>
+        &copy; 2023. Проект выполнен в качестве тестового задания.
+    </footer>
 </body>
 </html>
+

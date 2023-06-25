@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Запросы пользователей</title>
+    <style>
+        body {
+            background-color: rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        form input[type="text"],
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .pagination-link {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .current-page {
+            margin: 0 10px;
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        .record {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Бегущая строка</h1>
+        <a href="{% url 'running_line:index_page' %}" style="color: white; font-size: 18px;">Вернуться на главную страницу</a>
+
+    </header>
+
+    <div class="content">
+        <h2>На данной странице представлены последние запросы пользователей</h2>
+        {% for page in page_obj %}
+            <div class="record">
+                <h4>Текст, который представлен в видео: {{ page.text }}</h4>
+                <p>Длительность видео: {{ page.duration }}</p>
+                <p>Длина видео: {{ page.weight }}</p>
+                <p>Ширина видео: {{ page.height }}</p>
+                <p>Размер текста представленного в видео: {{ page.size_text }}</p>
+            </div>
+        {% endfor %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a class="pagination-link" href="?page={{ page_obj.previous_page_number }}">Назад</a>
+            {% endif %}
+
+            <span class="current-page">{{ page_obj.number }}</span>
+
+            {% if page_obj.has_next %}
+                <a class="pagination-link" href="?page={{ page_obj.next_page_number }}">Вперед</a>
+            {% endif %}
+        </div>
+
+    <footer>
+        &copy; 2023. Проект выполнен в качестве тестового задания.
+    </footer>
+    </div>
+</body>
+</html>

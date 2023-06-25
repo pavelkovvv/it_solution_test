@@ -1,8 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 
 from .forms import TextForm
 from .utils import create_video_with_text
+from .models import TextData
 
 
 def index(request):
@@ -32,4 +34,9 @@ def download_video(request):
         return response
 
 
-
+def stats(request):
+    text_data = TextData.objects.order_by('-id')
+    paginator = Paginator(text_data, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'stats.html', {'page_obj': page_obj})
