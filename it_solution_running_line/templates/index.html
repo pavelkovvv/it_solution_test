@@ -52,8 +52,8 @@
 
     <div class="content">
         <h2>Данный сайт позволяет выбрать параметры видео, которое впоследствии будет скачано</h2>
-        <form method="POST" action="">
-            {% csrf_token %}
+        <form method="POST" action="{% url 'running_line:index_page' %}">
+	  {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Сформировать видео и скачать его</button>
         </form>

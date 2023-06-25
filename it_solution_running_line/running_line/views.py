@@ -1,12 +1,14 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
+from django.views.decorators.csrf import csrf_protect
 
 from .forms import TextForm
 from .utils import create_video_with_text
 from .models import TextData
 
 
+@csrf_protect
 def index(request):
     if request.method == 'POST':
         form = TextForm(request.POST)
